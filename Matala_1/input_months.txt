@@ -1,0 +1,18 @@
+1
+i
+Thirty days hath September,
+April, June, and November;
+.
++1
+a
+All the rest have thirty-one,
+All the rest have thirty-one,
+.
+$
+c
+When February's days are twenty-nine.
+.
+-2
+d
+w poem.txt
+q

@@ -1,0 +1,25 @@
+a
+'T is a lesson you should hide,
+Try, try again;
+If at first
+ you don't succeed,
+Try, try again;
+Then your your courage should appear,
+For, if you will preserve,
+You will conqer, never fear;
+Try, try again.
+.
+1
+/preserve/
+s/preserve/persevere/
++1
+s/conqer/conquer/
+/lesson/
+s/hide/heed/
+/courage/
+s/your //
+-3
+j
+w poem.txt
+q
+
