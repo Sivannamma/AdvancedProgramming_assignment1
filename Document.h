@@ -14,7 +14,7 @@ public:
     void insert(std::vector<std::string> temp);
     void appand(std::vector<std::string> temp);
     void printVec();
-    bool search(std::string input);
+    int search(std::string input);
     bool searchAndReplace(std::string inputOld,std::string inputNew);
     bool wrtieToFile(std::string fileName);
     bool readFromFile(std::string fileName);

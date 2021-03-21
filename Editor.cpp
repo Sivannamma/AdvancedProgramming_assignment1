@@ -118,6 +118,8 @@ void Editor::loop()
                             inputToReplace += c;
                         }
                     }
+                    std::cout<<"1:"+inputToSearch<<std::endl;
+                     std::cout<<"2:"+inputToReplace<<std::endl;
                     this->document.searchAndReplace(inputToSearch, inputToReplace);
                 }
                 break;

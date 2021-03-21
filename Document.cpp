@@ -20,13 +20,21 @@ void Document::moveLine(char sign, int number)
 void Document::insert(std::vector<std::string> temp)
 {
     this->lines.insert(this->lines.begin() + this->line_number, temp.begin(), temp.end());
-    this->line_number = this->lines.size() - 1;
+    this->line_number = temp.size() + this->line_number - 1;
 }
 void Document::appand(std::vector<std::string> temp)
 {
-   // std::cout << this->line_number << std::endl;
-    this->lines.insert(this->lines.begin() + this->line_number + 1, temp.begin(), temp.end());
-    this->line_number = this->lines.size() - 1;
+    // std::cout << this->line_number << std::endl;
+    if (!lines.empty())
+    {
+        this->lines.insert(this->lines.begin() + this->line_number + 1, temp.begin(), temp.end());
+        this->line_number = temp.size() + this->line_number;
+    }
+    else
+    {
+        this->lines.insert(this->lines.begin(), temp.begin(), temp.end());
+        this->line_number = this->lines.size() - 1;
+    }
 }
 void Document::printVec()
 {
@@ -39,7 +47,7 @@ void Document::printVec()
 // from the number of line we r in and forward. if not found forward, we need to search backwards.
 // we r using the function .find(givvenAWordToSearch) and it goes over our string , if we didnt
 // find the word, we check if it reached std::string:nops
-bool Document::search(std::string input)
+int Document::search(std::string input)
 {
 
     int itr;
@@ -51,7 +59,8 @@ bool Document::search(std::string input)
         if (itr != std::string::npos)
         {
             std::cout << *line << std::endl;
-            return true;
+            line_number = line - lines.begin();
+            return line - lines.begin();
         }
     }
     // if we reach here , it means in the previous for we couldnt find the
@@ -65,22 +74,27 @@ bool Document::search(std::string input)
         if (itr != std::string::npos)
         {
             std::cout << *line << std::endl;
-            return true;
+            line_number = line - lines.begin();
+            return line - lines.begin();
         }
     }
     std::cout << "?" << std::endl;
-    return false;
+    return -1;
 }
 bool Document::searchAndReplace(std::string inputOld, std::string inputNew)
 {
-    std::string str = lines[line_number];
-    //  std::cout << "note : "+lines[line_number] << std::endl;
+    int position = search(inputOld);
+    if (position == -1)
+        return false;
+    std::string str = lines[position];
     int itr = str.find(inputOld);
-    //  std::cout << itr << std::endl;
+    //  std::cout << "my string is :"+str << std::endl;
+    // std::cout << "found in line number : " << std::endl;
+    // std::cout << position << std::endl;
     if (itr != std::string::npos)
     {
-        lines[line_number].replace(itr, inputOld.length(), inputNew);
-        //[itr]=inputNew;
+        lines[position].replace(itr, inputOld.length(), inputNew);
+        // std::cout << lines[line_number] << std::endl;
         return true;
     }
     return false;
